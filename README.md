@@ -1,2 +1,2 @@
 # sync_utilities
-script to sync files between severs
+The scripts to sync files between severs
