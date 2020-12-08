@@ -1,7 +1,7 @@
 #!/bin/bash
 #---------------------------------------------------------------------------------
 # This script is to set up connections between linux servers via RSA configuration
-# This needs dependency of ssh and gnu-opt
+# This needs dependency of openssh and gnu-opt
 # University of Copenhagen
 # 2020/12/08
 # Yan Hui
@@ -13,7 +13,7 @@ usage () {
     echo ""
     echo "Note: This script sets up connections between servers via a RSA key"
     echo "Usage: $0 [-r --remote-address ]"
-    echo "  -r, --remote-address    Required, remote host address. Format: server@xx.xx.xx.xx"
+    echo "  -r, --remote-address    Required, remote host address. Format: user@hostname | host"
     echo "  -h, --help    Optional, Help message."   
     echo ""
     echo "Example: $0 -i server@10.61.11.11"
