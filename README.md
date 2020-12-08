@@ -4,8 +4,12 @@ The scripts to sync files between severs.
 **Steps to deploy the system sync**
 
 *Step 1: set up ssh connections between servers via RSA keys*
+
 This only has to be done for the first use. It can be easily set up using the *RSAconfig.sh* script. And you need to provide the password to transfer the RSA key.
-**Note** You has to manually prepare the ssh config file first. It follows [ssh config file format](https://man7.org/linux/man-pages/man5/ssh_config.5.html). A simple demo can be found with *./RSAconfig.sh -h*
+
+**Note** 
+
+You has to manually prepare the ssh config file first. It follows [ssh config file format](https://man7.org/linux/man-pages/man5/ssh_config.5.html). A simple demo can be found with *./RSAconfig.sh -h*
 
 ```
 ./RSAconfig.sh -r name@host
@@ -20,6 +24,7 @@ ssh server
 ```
 
 *Step 2: Deploy the sync system*
+
 You need to specifiy the servers to backup the files.
 A demo is shown as below:
 Servers | files | directory
