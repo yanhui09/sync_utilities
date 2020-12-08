@@ -8,7 +8,9 @@ This only has to be done for the first use. It can be easily set up using the *R
 
 ```
 ./RSAconfig.sh -r name@host
+```
 e.g.
+```
 ./RSAconfig.sh -r server@10.61.11.11
 ```
 You shall log in the server without password if you try
