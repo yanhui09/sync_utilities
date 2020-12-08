@@ -28,7 +28,7 @@ ssh server
 
 You need to specifiy the servers to backup the files.
 A demo is shown as below:
-Servers | files | directory
---- | --- | ---
-`Kuserver` | fast5 | xxx
-`Foodserver` | fastq | xxx
+local path | Servers | files | remote path
+--- | --- | --- | ---
+/runx/fast5 | `Kuserver` | fast5 | /raw/runx/fast5
+/runx/fastq | `Foodserver` | fastq | /data/runx/fastq
