@@ -1,7 +1,7 @@
 #!/bin/bash
 #---------------------------------------------------------------------------------
 # This script is to sync files by ssh after RSA configuration
-# This needs dependency of openssh, getopt
+# This needs dependency of openssh, getopt, rsync, inotify
 # University of Copenhagen
 # 2020/12/08
 # Yan Hui
@@ -13,7 +13,7 @@ usage () {
     echo ""
     echo "Note: This script sync files between servers configured by RSA keys."
     echo "It backs up the local fast5 and fastq files to remote hosts storing fast5 and fastq files"
-    echo "Usage: $0 [--preset -f5h --fast5-host -fqh --fastq-host -rf5d --remote-fast5_directory -rfqd --remote-fastq_directory -lf5d --local-fast5_directory -lfqd --local-fastq_directory]"
+    echo "Usage: $0 [--preset -n -f5h -fqh -rf5d -rfqd -lf5d -lfqd]"
     echo "  -p, --preset    use the preset arguments in the script (initailly set for KU FOOD servers)"
     echo "  -n, --nprun    Required, nanopore run name to sync"
     echo "  -s, --f5h    Required if no --preset, fast5 host. Format: user@hostname | host"
@@ -64,16 +64,16 @@ if [ "$PRESET" == true ]; then
     FQ_HOST=lubuntu   # default fastq host at KU FOOD
    fi
    if [ -z "$RF5_DIR" ]; then
-    RF5_DIR=/data/fast5_backup/"$NP_RUN"    # default path of remote fast5 directory at KU FOOD    
+    RF5_DIR="/data/fast5_backup/$NP_RUN"    # default path of remote fast5 directory at KU FOOD    
    fi
    if [ -z "$RFQ_DIR" ]; then
-    RFQ_DIR=/data/"$NP_RUN"/fastq4DEMUX    # default path of remote fastq directory (to be demultiplexed) at KU FOOD
+    RFQ_DIR="/data/$NP_RUN/fastq4DEMUX"    # default path of remote fastq directory (to be demultiplexed) at KU FOOD
    fi
    if [ -z "$LF5_DIR" ]; then
-    LF5_DIR=$(find /data/"$NP_RUN" -type d -name fast5_pass)    # default path of local fast5 directory at KU FOOD
+    LF5_DIR=$(find "/data/$NP_RUN" -type d -name fast5_pass)    # default path of local fast5 directory at KU FOOD
    fi
    if [ -z "$LFQ_DIR" ]; then
-    LFQ_DIR=$(find /data/"$NP_RUN" -type d -name fastq_pass)    # default path of local fastq directory at KU FOOD
+    LFQ_DIR=$(find "/data/$NP_RUN" -type d -name fastq_pass)    # default path of local fastq directory at KU FOOD
    fi
 fi
 
@@ -105,13 +105,9 @@ fi
 # substitute scp
 # fastq files come after fast5 due to the process of basecalling
 
-while true ; do
-    for file in "$LFQ_DIR"/*fastq; do
-        file_id="${file%%.*}"
-        rsync -vP "$LFQ_DIR/$file_id.fastq" "$FQ_HOST@$RFQ_DIR/$file_id.fastq"
-        rsync -vP "$LF5_DIR/$file_id.fast5" "$F5_HOST@$RF5_DIR/$file_id.fast5"
-        # wait for new fastq files
-        
-        
-    done        
+while inotifywait -r -e modify,create $LFQ_DIR; do
+    rsync -hvrtzPe ssh "$LFQ_DIR/" "$FQ_HOST@$RFQ_DIR"
+    rsync -hvrtzPe ssh "$LF5_DIR/" "$F5_HOST@$RF5_DIR"    
 done
+
+exit 0
