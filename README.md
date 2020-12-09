@@ -26,9 +26,18 @@ ssh server
 
 *Step 2: Deploy the sync system*
 
+**This script use inotify-tools to monitor file change**
+You may need *sudo* to install, for Ubuntu dsitribution
+```
+sudo apt-get update -y
+sudo apt-get install -y inotify-tools
+```
+
 You need to specifiy the servers to backup the files.
 A demo is shown as below:
 local path | Servers | files | remote path
 --- | --- | --- | ---
 /runx/fast5 | `Kuserver` | fast5 | /raw/runx/fast5
 /runx/fastq | `Foodserver` | fastq | /data/runx/fastq
+
+

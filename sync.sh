@@ -13,8 +13,9 @@ usage () {
     echo ""
     echo "Note: This script sync files between servers configured by RSA keys."
     echo "It backs up the local fast5 and fastq files to remote hosts storing fast5 and fastq files"
+    echo ""
     echo "Usage: $0 [--preset -n -f5h -fqh -rf5d -rfqd -lf5d -lfqd]"
-    echo "  -p, --preset    use the preset arguments in the script (initailly set for KU FOOD servers)"
+    echo "  -p, --preset    Use the preset arguments in the script (Initial settings at KU FOOD)"
     echo "  -n, --nprun    Required, nanopore run name to sync"
     echo "  -s, --f5h    Required if no --preset, fast5 host. Format: user@hostname | host"
     echo "  -k, --fqh    Required if no --preset, fastq host. Format: user@hostname | host"
@@ -24,7 +25,9 @@ usage () {
     echo "  -l, --lfqd    Required if no --preset, fastq directory path on the local host"
     echo "  -h, --help    Optional, Help message."   
     echo ""
-    echo "Example: $0 -p -n minion_35"
+    echo "Example:" 
+    echo "$0 -p -n minion_35"
+    echo "$0 -p -n minion_36 --fqh fq_host2"
     echo ""
     echo "";}
 
@@ -105,9 +108,10 @@ fi
 # substitute scp
 # fastq files come after fast5 due to the process of basecalling
 
-while inotifywait -r -e modify,create $LFQ_DIR; do
-    rsync -hvrtzPe ssh "$LFQ_DIR/" "$FQ_HOST@$RFQ_DIR"
-    rsync -hvrtzPe ssh "$LF5_DIR/" "$F5_HOST@$RF5_DIR"    
-done
+while 
+    rsync -hvrtPe ssh "$LFQ_DIR/" "$FQ_HOST@$RFQ_DIR"
+    rsync -hvrtPe ssh "$LF5_DIR/" "$F5_HOST@$RF5_DIR"
+    inotifywait -e modify,create -t 900 "$LFQ_DIR" 
+do true ; done
 
 exit 0
