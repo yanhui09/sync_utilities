@@ -40,7 +40,9 @@ local path | Servers | files | remote path
 /runx/fast5 | `Kuserver` | fast5 | /raw/runx/fast5
 /runx/fastq | `Foodserver` | fastq | /data/runx/fastq
 
-**livesync.sh***To real-time sync all procedures: append, delete*
+**live sync mode**
+
+*To real-time sync all procedures: append, delete, revision*
 *livesync.sh* sync all local procedures at the remote servers
 Use `livesync.yml` to define the remote host
 
