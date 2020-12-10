@@ -19,7 +19,7 @@ usage () {
     echo "It starts an infinite loop to monitor the input path. Stop the shell when you don't want monitor the path anymore."
     echo ""
     echo "Usage: $0 [-m -h]"
-    echo "  -m, --monitor-path    Required, the monitor path."
+    echo "  -m, --monitor-path    Required, the monitor path (absolute/relative)."
     echo "  -h, --help    Optional, Help message."   
     echo ""
     echo "Example: $0 -m /dir_all_runs"

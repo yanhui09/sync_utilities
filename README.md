@@ -58,7 +58,7 @@ sync.sh -p -n runx -rfqd /data/runx/fastq_new
 Real-time sync when a new nanopore run is created.
 `livesync.sh` will call one `sync.sh` when a new run is created at the monitor path.
 ```
-livesync.sh -m /data_allruns
+livesync.sh -m /path2dir_runs
 ```
 *This calls an infinite loop to monitor the input path. `sync.sh` accumulates in parallel if previous `sync.sh` hasn't exited.*
 
