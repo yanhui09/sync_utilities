@@ -4,7 +4,7 @@ The scripts to sync files between severs.
 **Steps to deploy the system sync**
 
 *Step 1: set up ssh connections between servers via RSA keys*<br>
-This only has to be done for the first use. It can be easily set up using the *RSAconfig.sh* script. And you need to provide the password to transfer the RSA key.
+This only has to be done for the first use. It can be easily set up using the `RSAconfig.sh` script. And you need to provide the password to transfer the RSA key.
 
 **Note**<br>
 You has to manually prepare the ssh config file first. It follows [ssh config file format](https://man7.org/linux/man-pages/man5/ssh_config.5.html). A simple demo can be found with *./RSAconfig.sh -h*
@@ -15,7 +15,7 @@ You has to manually prepare the ssh config file first. It follows [ssh config fi
 ```
 e.g.
 ```
-./RSAconfig.sh -r server@10.61.11.11
+./RSAconfig.sh -r server@xx.xx.xx.xx
 ```
 You shall log in the server without password if you try
 ```
@@ -23,7 +23,8 @@ ssh server
 ```
 
 *Step 2: Deploy the sync system*<br>
-**This script use inotify-tools to monitor file change.**You may need *sudo* to install, for Ubuntu dsitribution
+**This script use `inotify-tools` to monitor file change.**
+You may need `sudo` to install, for Ubuntu dsitribution
 ```
 sudo apt-get update -y
 sudo apt-get install -y inotify-tools
@@ -45,12 +46,12 @@ Or partially inherit -p
 ```
 sync.sh -p -n runx -rfqd /data/runx/fastq_new
 ```
-<br><br>**Live sync**<br><br>
-*To real-time sync when a new nanopore run is created
+<br><br>**Live sync**<br>
+Real-time sync when a new nanopore run is created.<br>
 *livesync.sh* will call one `sync.sh` when a new run is created at the monitor path.
 ```
 livesync.sh -m /data_allruns
 ```
-*This calls an infinite loop to monitor the input path. `Sync.sh` accumulates in parallel if previous sync.sh hasn't exited*
+*This calls an infinite loop to monitor the input path. `sync.sh` accumulates in parallel if previous `sync.sh` hasn't exited*
 
 
