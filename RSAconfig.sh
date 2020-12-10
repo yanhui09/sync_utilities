@@ -12,7 +12,7 @@
 usage () {
     echo ""
     echo "Note: This script sets up connections between servers via a RSA key"
-    echo "Usage: $0 [-r --remote-address ]"
+    echo "Usage: $0 [-r -h]"
     echo "  -r, --remote-address    Required, remote host address. Format: user@hostname | host"
     echo "  -h, --help    Optional, Help message."   
     echo ""

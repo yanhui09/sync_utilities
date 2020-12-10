@@ -14,7 +14,7 @@ usage () {
     echo "Note: This script sync files between servers configured by RSA keys."
     echo "It backs up the local fast5 and fastq files to remote hosts storing fast5 and fastq files"
     echo ""
-    echo "Usage: $0 [--preset -n -f5h -fqh -rf5d -rfqd -lf5d -lfqd]"
+    echo "Usage: $0 [--preset -n --f5h --fqh --rf5d --rfqd --lf5d --lfqd -h]"
     echo "  -p, --preset    Use the preset arguments in the script (Initial settings at KU FOOD)"
     echo "  -n, --nprun    Required, nanopore run name to sync"
     echo "  -s, --f5h    Required if no --preset, fast5 host. Format: user@hostname | host"

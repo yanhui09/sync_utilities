@@ -40,9 +40,9 @@ local path | Servers | files | remote path
 /runx/fast5 | `Kuserver` | fast5 | /raw/runx/fast5
 /runx/fastq | `Foodserver` | fastq | /data/runx/fastq
 
-**live sync mode**
+**live sync**
 
-*To real-time sync all procedures: append, delete, revision*
-*livesync.sh* sync all local procedures at the remote servers
-Use `livesync.yml` to define the remote host
+*To real-time sync when a new nanopore run is created
+*livesync.sh* will call one sync.sh when a new run is created at the monitored path.
+
 
