@@ -32,12 +32,18 @@ sudo apt-get install -y inotify-tools
 You need to specifiy the servers to backup the files. A demo is shown as below:
 local path | Servers | files | remote path
 --- | --- | --- | ---
-/runx/fast5 | `Kuserver` | fast5 | /raw/runx/fast5
-/runx/fastq | `Foodserver` | fastq | /data/runx/fastq
-
-TO sync `run_30` at KU FOOD
+/runx/fast5 | `kuserver` | fast5 | /raw/runx/fast5
+/runx/fastq | `foodserver` | fastq | /data/runx/fastq
 ```
-sync.sh -p -n run_30
+sync.sh --f5h kuserver --fqh foodserver -rf5d /raw/runx/fast5 --rfqd /data/runx/fastq --lf5d /runx/fast5 --lfqd /runx/fastq
+```
+To sync `runx` at KU FOOD
+```
+sync.sh -p -n runx
+```
+Or partially inherit -p
+```
+sync.sh -p -n runx -rfqd /data/runx/fastq_new
 ```
 <br><br>**Live sync**<br><br>
 *To real-time sync when a new nanopore run is created
