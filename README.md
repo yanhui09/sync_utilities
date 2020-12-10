@@ -9,17 +9,19 @@ This only has to be done for the first use. It can be easily set up using the `R
 **Note**<br>
 You has to manually prepare the `ssh config file` first. It follows [ssh config file format](https://man7.org/linux/man-pages/man5/ssh_config.5.html). A simple demo can be found with `./RSAconfig.sh -h`.
 
+The `ssh config file` is usually placed at `~/.ssh/config`. And it looks like
 ```
 Host server
 User server
 Hostname xx.xx.xx.xx
 IdentityFile ~/.ssh/id_rsa
 ```
+To set the RSA configuration, you need to specify the remote host using `user@hostname` or `host`.
 ```
 ./RSAconfig.sh -r user@hostname
 ./RSAconfig.sh -r host
 ```
-e.g.
+E.g.
 ```
 ./RSAconfig.sh -r server@xx.xx.xx.xx
 ```
