@@ -84,7 +84,7 @@ fi
 # benchmark on personal server
 F5_HOST=localhost
 FQ_HOST=yichang
-RF5_DIR="/home/yanhui/sharedFatboy/backup_ku/hdrive/$NP_RUN" # test 
+RF5_DIR="/home/yanhui/sharedFatboy/backup_ku/hdrive/sync_test/$NP_RUN" # test 
 RFQ_DIR="/mnt/raid5/yanhui/sync_test/$NP_RUN/fastq4DEMUX" 
 LF5_DIR=$(find "$HOME/Sdevelop/sync_utilities/sync_test/$NP_RUN" -type d -name fast5_pass)
 LFQ_DIR=$(find "$HOME/Sdevelop/sync_utilities/sync_test/$NP_RUN" -type d -name fastq_pass)
