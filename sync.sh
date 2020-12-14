@@ -61,13 +61,14 @@ done
 # preset arguments will be overwritten if --f5h, --fqh, --rf5d, --rfqd, --lf5d, --lfqd applied
 if [ "$PRESET" == true ]; then
    if [ -z "$F5_HOST" ]; then
-    F5_HOST=kuser    # default fast5 host at KU FOOD
+    F5_HOST=localhost    # default fast5 host at KU FOOD
    fi
    if [ -z "$FQ_HOST" ]; then
     FQ_HOST=lubuntu   # default fastq host at KU FOOD
    fi
    if [ -z "$RF5_DIR" ]; then
-    RF5_DIR="/data/fast5_backup/$NP_RUN"    # default path of remote fast5 directory at KU FOOD    
+   # default path of remote fast5 directory at KU FOOD, smb disk 
+    RF5_DIR="/run/user/1000/gvfs/smb-share:server=science.domian,share=groupdirs/SCIENCE-FOOD-HTS-STORAGE/ONT-data/FASTA5-storage/$NP_RUN"    
    fi
    if [ -z "$RFQ_DIR" ]; then
     RFQ_DIR="/data/$NP_RUN/fastq4DEMUX"    # default path of remote fastq directory (to be demultiplexed) at KU FOOD
@@ -80,6 +81,13 @@ if [ "$PRESET" == true ]; then
    fi
 fi
 
+# benchmark on personal server
+F5_HOST=localhost
+FQ_HOST=yichang
+RF5_DIR="/home/yanhui/sharedFatboy/backup_ku/hdrive/$NP_RUN" # test 
+RFQ_DIR="/mnt/raid5/yanhui/sync_test/$NP_RUN/fastq4DEMUX" 
+LF5_DIR=$(find "$HOME/data/$NP_RUN" -type d -name fast5_pass)
+LFQ_DIR=$(find "$HOME/data/$NP_RUN" -type d -name fastq_pass)
 # check if $LF5_DIR and $LFQ_DIR exist in the local host (nanopore sequencer)  
 if [[ ! -d "$LF5_DIR" || ! -d "$LFQ_DIR" ]]; then
     echo "Can't find the local fast5 and fastq directory. Please check if they exist at the sequencing host."

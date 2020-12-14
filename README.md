@@ -29,7 +29,14 @@ You shall log in the `server` without password if you try
 ```
 ssh server
 ```
-
+*The file transfer is through `ssh` protocol. You also have to set up the RSA configuration if you've mounted one network disk via `samba`.* Normally you don't have to edit the `ssh config file` since `localhost` is preset in linux. You can configure the local host through
+```
+./RSAconfig.sh -r localhost
+```
+Test it and you shall in the `local host` without password
+```
+ssh localhost
+```
 <br>*Step 2: Deploy the sync system*<br>
 **This script use `inotify-tools` to monitor file change.**
 You may need `sudo` to install, for Ubuntu dsitribution
