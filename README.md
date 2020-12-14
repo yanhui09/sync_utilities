@@ -59,7 +59,7 @@ sync.sh -p -n runx
 ```
 Or partially inherit -p
 ```
-sync.sh -p -n runx -rfqd /data/runx/fastq_new
+sync.sh -p -n runx --rfqd /data/runx/fastq_new -t 1800
 ```
 <br><br>**Live sync**<br><br>
 Real-time sync when a new nanopore run is created.
