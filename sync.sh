@@ -86,8 +86,8 @@ F5_HOST=localhost
 FQ_HOST=yichang
 RF5_DIR="/home/yanhui/sharedFatboy/backup_ku/hdrive/$NP_RUN" # test 
 RFQ_DIR="/mnt/raid5/yanhui/sync_test/$NP_RUN/fastq4DEMUX" 
-LF5_DIR=$(find "$HOME/data/$NP_RUN" -type d -name fast5_pass)
-LFQ_DIR=$(find "$HOME/data/$NP_RUN" -type d -name fastq_pass)
+LF5_DIR=$(find "$HOME/Sdevelop/sync_utilities/sync_test/$NP_RUN" -type d -name fast5_pass)
+LFQ_DIR=$(find "$HOME/Sdevelop/sync_utilities/sync_test/$NP_RUN" -type d -name fastq_pass)
 # check if $LF5_DIR and $LFQ_DIR exist in the local host (nanopore sequencer)  
 if [[ ! -d "$LF5_DIR" || ! -d "$LFQ_DIR" ]]; then
     echo "Can't find the local fast5 and fastq directory. Please check if they exist at the sequencing host."
