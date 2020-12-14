@@ -51,7 +51,7 @@ local path | Servers | files | remote path
 /runx/fast5 | `kuserver` | fast5 | /raw/runx/fast5
 /runx/fastq | `foodserver` | fastq | /data/runx/fastq
 ```
-sync.sh --f5h kuserver --fqh foodserver -rf5d /raw/runx/fast5 --rfqd /data/runx/fastq --lf5d /runx/fast5 --lfqd /runx/fastq
+sync.sh -t 900 --f5h kuserver --fqh foodserver --rf5d /raw/runx/fast5 --rfqd /data/runx/fastq --lf5d /runx/fast5 --lfqd /runx/fastq
 ```
 To sync `runx` at KU FOOD
 ```
@@ -67,6 +67,6 @@ Real-time sync when a new nanopore run is created.
 ```
 livesync.sh -m /path2dir_runs
 ```
-*This calls an infinite loop to monitor the input path. `sync.sh` accumulates in parallel if previous `sync.sh` hasn't exited.*
+*This calls an infinite loop to monitor the input path. `sync.sh` accumulates if previous `sync.sh` hasn't exited.*
 
 
