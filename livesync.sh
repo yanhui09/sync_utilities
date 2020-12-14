@@ -47,5 +47,9 @@ done
 
 while RES=$(inotifywait -e create "$MONITOR_DIR"); do 
     RUN_NEW=${RES#?*CREATE }
+    while [ ! -d "$MONITOR_DIR"/"$RUN_NEW"/.*/fastq_pass ] || [ -z "$(ls -A "$MONITOR_DIR"/"$RUN_NEW"/.*/fastq_pass)" ]; do # wait files fed to fastq-pass directory
+        sleep 30
+    done
     sync -p -n "$RUN_NEW" & # This may accumulate when previous sync.sh hasn't exited.
 done
+
