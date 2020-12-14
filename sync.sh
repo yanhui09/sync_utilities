@@ -98,12 +98,14 @@ fi
 # to avoid data overwriting due to wrong type-in
 # if the directory has been created, prompt a warning to confirm whether to proceed sync.
 if ssh "$F5_HOST" "[ -d \$RF5_DIR ]"; then
-    read -pr "The $RF5_DIR has already existed at $F5_HOST.\nAssign a new remote fast5 directory (Abosulte path)\nor press enter to continue:" RF5_DIR_NEW
+    echo "The $RF5_DIR has already existed at $F5_HOST."
+    read -pr "Assign a new remote fast5 directory (Abosulte path) or press enter to continue:" RF5_DIR_NEW
     if [ -n "$RF5_DIR_NEW" ]; then
         RF5_DIR="$RF5_DIR_NEW"
     fi    
 elif ssh "$FQ_HOST" "[ -d \$RFQ_DIR ]"; then
-    read -pr "The $RFQ_DIR has already existed at $FQ_HOST.\nAssign a new remote fastq directory (Abosulte path)\nor press enter to continue:" RFQ_DIR_NEW
+    echo "The $RFQ_DIR has already existed at $FQ_HOST."
+    read -pr "Assign a new remote fastq directory (Abosulte path) or press enter to continue:" RFQ_DIR_NEW
     if [ -n "$RFQ_DIR" ]; then
         RFQ_DIR="$RFQ_DIR_NEW"
     fi    
