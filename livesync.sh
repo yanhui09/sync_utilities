@@ -46,13 +46,18 @@ done
 #############################################################################
 
 while RES=$(inotifywait -e create "$MONITOR_DIR"); do 
-    RUN_NEW=${RES#?*CREATE }
+    if [[ ! "$RES" =~ "CREATE,ISDIR " ]]; then
+       continue
+    fi
+    RUN_NEW=${RES#?*CREATE,ISDIR }
+    printf "Detected a new NP run: %s\n" "$RUN_NEW"
     while true; do 
         sleep 30  # wait files fed to fastq-pass directory
-        if [ -d "$MONITOR_DIR"/"$RUN_NEW"/.*/fastq_pass ]; then
+        fastq_pass_DIR=$(find "$MONITOR_DIR/$RUN_NEW" -type d -name "fastq_pass")
+        if [ -n "$fastq_pass_DIR" ]; then
             break
         fi
     done
-    sync -p -n "$RUN_NEW" & # This may accumulate when previous sync.sh hasn't exited.
+    ./sync.sh -p -n "$RUN_NEW" & # This may accumulate when previous sync.sh hasn't exited.
 done
 
