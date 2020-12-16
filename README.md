@@ -13,7 +13,7 @@ TMP=$(readlink -f sync_utilities)
 echo 'export PATH="$TMP:$PATH"' >> ~/.bashrc
  ```
 
-**Steps to deploy the system sync**
+<br>**Steps to deploy the system sync**<br>
 
 *Step 1: set up ssh connections between servers via RSA keys*<br>
 This only has to be done for the first use. It can be easily set up using the `RSAconfig.sh` script. And you need to provide the password to transfer the RSA key.
