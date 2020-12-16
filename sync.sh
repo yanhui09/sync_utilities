@@ -53,7 +53,7 @@ while true ; do
                 -d|--rfqd) RFQ_DIR="$2"; shift 2;;
                 -j|--lf5d) LF5_DIR="$2"; shift 2;;
                 -l|--lfqd) LFQ_DIR="$2"; shift 2;;
-                -p|--preset) PRESET=true, shift 1;; # Indicator changed
+                -p|--preset) PRESET=true; shift 1;; # Indicator changed
                 -h|--help) usage; exit 1; shift 1;;
                 *) break;;    
         esac
@@ -69,14 +69,14 @@ if [ "$PRESET" == true ]; then
     F5_HOST=localhost    # default fast5 host at KU FOOD
    fi
    if [ -z "$FQ_HOST" ]; then
-    FQ_HOST=lubuntu   # default fastq host at KU FOOD
+    FQ_HOST=kuserver   # default fastq host at KU FOOD
    fi
    if [ -z "$RF5_DIR" ]; then
    # default path of remote fast5 directory at KU FOOD, smb disk 
-    RF5_DIR="/run/user/1000/gvfs/smb-share:server=science.domian,share=groupdirs/SCIENCE-FOOD-HTS-STORAGE/ONT-data/FASTA5-storage/$NP_RUN"    
+    RF5_DIR="/run/user/1000/gvfs/smb-share:server=science.domain,share=groupdirs/SCIENCE-FOOD-HTS-STORAGE/ONT-data/FAST5-storage/$NP_RUN"    
    fi
    if [ -z "$RFQ_DIR" ]; then
-    RFQ_DIR="/data/$NP_RUN/fastq4DEMUX"    # default path of remote fastq directory (to be demultiplexed) at KU FOOD
+    RFQ_DIR="/media/server/95d691e7-0d78-417e-b796-a49c36203e5e/LUKAS/GridION_fq_storage/$NP_RUN/basecalled_fq"    # default path of remote fastq directory (to be demultiplexed) at KU FOOD
    fi
    if [ -z "$LF5_DIR" ]; then
     LF5_DIR=$(find "/data/$NP_RUN" -type d -name fast5_pass)    # default path of local fast5 directory at KU FOOD
