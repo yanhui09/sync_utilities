@@ -58,6 +58,6 @@ while RES=$(inotifywait -e create "$MONITOR_DIR"); do
             break
         fi
     done
-    ./sync.sh -p -n "$RUN_NEW" & # This may accumulate when previous sync.sh hasn't exited.
+    sync.sh -p -n "$RUN_NEW" & # This may accumulate when previous sync.sh hasn't exited.
 done
 
