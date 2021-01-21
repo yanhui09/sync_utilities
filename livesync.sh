@@ -38,7 +38,7 @@ eval set -- "$args"
 
 while true; do
         case "$1" in
-                -m|--monitor-path) MONITOR_DIR="$2"; shift 1;;
+                -m|--monitor-path) MONITOR_DIR="$2"; shift 2;;
                 -h|--help) usage; exit 1; shift 1;;
                 *) break;;    
         esac
