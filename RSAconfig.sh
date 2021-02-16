@@ -16,7 +16,7 @@ usage () {
     echo "  -r, --remote-address    Required, remote host address. Format: user@hostname | host"
     echo "  -h, --help    Optional, Help message."   
     echo ""
-    echo "Example: $0 -i server@10.61.11.11"
+    echo "Example: $0 -r server@10.61.11.11"
     echo ""
     echo "Please first prepare one configure file at $HOME/.ssh/config. The format is as follow:"
     echo "Host server"

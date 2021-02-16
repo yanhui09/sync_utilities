@@ -37,7 +37,7 @@ usage () {
 if [ $# -eq 0 ] || ! [[ $* =~ ^(-|--)[a-z] ]]; then 
     echo "Invalid use: please check the help message below." ; usage; exit 1; fi
 # Params loading
-args=$(getopt --long "preset,nprun:,wait::,f5h::,fqh::,rf5d::rfqd::,lf5d::,lfqd::,help" -o "pn:t::s::k::a::d::j::l::h" -n "Input error" -- "$@")
+args=$(getopt --long "preset,nprun:,wait:,f5h:,fqh:,rf5d:,rfqd:,lf5d:,lfqd:,help" -o "pn:t:s:k:a:d:j:l:h" -n "Input error" -- "$@")
 # Ensure corrected input of params
 if [ $? -ne 0 ]; then usage; exit 1; fi
 
