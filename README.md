@@ -58,7 +58,7 @@ sudo apt-get install -y inotify-tools
 ```
 
 You need to specifiy the servers to backup the files. A demo is shown as below:
-local path | Servers | files | remote path
+local path | remote host | files | remote path
 --- | --- | --- | ---
 /runx/fast5 | `kuserver` | fast5 | /raw/runx/fast5
 /runx/fastq | `foodserver` | fastq | /data/runx/fastq
