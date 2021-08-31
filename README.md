@@ -28,16 +28,24 @@ User server
 Hostname xx.xx.xx.xx
 IdentityFile ~/.ssh/id_rsa
 ```
+Make sure you have `rw` permission to the `~/.ssh/id_rsa`
+```
+chmod 600 ~/.ssh/id_rsa
+```
+
 To set the RSA configuration, you need to specify the remote host using `user@hostname` or `host`.
 ```
 RSAconfig.sh -r user@hostname
+```
+```
 RSAconfig.sh -r host
 ```
+
 E.g.
 ```
 RSAconfig.sh -r server@xx.xx.xx.xx
 ```
-You shall log in the `server` without password if you try
+You shall now log in the `server` without password if you try
 ```
 ssh server
 ```
