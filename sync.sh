@@ -69,7 +69,7 @@ if [ "$PRESET" == true ]; then
     F5_HOST=localhost    # default fast5 host at KU FOOD
    fi
    if [ -z "$FQ_HOST" ]; then
-    FQ_HOST=kuserver   # default fastq host at KU FOOD
+    FQ_HOST=krakenosh   # default fastq host at KU FOOD
    fi
    if [ -z "$RF5_DIR" ]; then
    # default path of remote fast5 directory at KU FOOD, smb disk 
