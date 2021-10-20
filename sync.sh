@@ -146,7 +146,7 @@ rsync_make(){
     local __RSYNC_CMD='rsync -hvrtPe '
     if [ "$__LOCAL" == true ]; then
         __RSYNC_CMD+="${__LDIR} ${__RDIR}"
-    elif
+    else
         __RSYNC_CMD+="ssh ${__LDIR} ${__HOST}:${__RDIR}"
     fi
     echo ${__RSYNC_CMD}
