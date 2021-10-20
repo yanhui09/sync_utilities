@@ -112,23 +112,20 @@ if [[ ! -d "$LF5_DIR" || ! -d "$LFQ_DIR" ]]; then
     exit 1
 fi
 
-# double-check if $NP_RUN (the nanopre run directory) has been created in the fast5 and fastq host
-# to avoid data overwriting due to wrong type-in
-# if the directory has been created, prompt a warning to confirm whether to proceed sync.
-if ssh $F5_HOST "[ -d $RF5_DIR ]"; then
-    echo "The $RF5_DIR has already existed at remote fast5 host."
-    read -p "Reassign a new remote fast5 directory (Abosulte path) or press enter to continue:" -r RF5_DIR_NEW
-    if [ -n "$RF5_DIR_NEW" ]; then
-        RF5_DIR="$RF5_DIR_NEW"
-    fi    
-fi
-if ssh $FQ_HOST "[ -d $RFQ_DIR ]"; then
-    echo "The $RFQ_DIR has already existed at remote fastq host."
-    read -p "Reassign a new remote fastq directory (Abosulte path) or press enter to continue:" -r RFQ_DIR_NEW
-    if [ -n "$RFQ_DIR_NEW" ]; then
-        RFQ_DIR="$RFQ_DIR_NEW"
+# check if $NP_RUN (the nanopre run directory) has been created in the fast5 and fastq host
+dir_check(){
+    local __HOST=$1
+    local __RDIR=$2
+    if ssh $__HOST "[ -d $__RDIR ]"; then
+       echo "Warning: The $__RDIR existed in the host."
+       echo "No worry. The existing files will be ignored. :)"
+       echo "Consider renaming the run direcotry locally if you need."
     fi
-fi
+}
+
+dir_check $F5_HOST $RF5_DIR
+dir_check $FQ_HOST $RFQ_DIR
+
 # create the remote fast5 and fastq directory
 ssh $F5_HOST "mkdir -p $RF5_DIR"
 ssh $FQ_HOST "mkdir -p $RFQ_DIR"
