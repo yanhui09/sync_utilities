@@ -24,6 +24,8 @@ usage () {
     echo "  -d, --rfqd    overwrite -p if applied, absolute path for fastq directory on remote host"
     echo "  -j, --lf5d    overwrite -p if applied, absolute/relative path for fast5 directory on the local host"
     echo "  -l, --lfqd    overwrite -p if applied, absolute/relative path for fastq directory on the local host"
+    echo "  --f5local    overwrite -p if applied, sync fast5 on the local host"
+    echo "  --fqlocal    overwrite -p if applied, sync fastq on the local host"
     echo "  -h, --help    Optional, Help message."   
     echo ""
     echo "Example:" 
@@ -53,6 +55,8 @@ while true ; do
                 -d|--rfqd) RFQ_DIR="$2"; shift 2;;
                 -j|--lf5d) LF5_DIR="$2"; shift 2;;
                 -l|--lfqd) LFQ_DIR="$2"; shift 2;;
+                --f5local) F5_LOCAL=true; shift 1;;
+                --fqlocal) FQ_LOCAL=true; shift 1;;
                 -p|--preset) PRESET=true; shift 1;; # Indicator changed
                 -h|--help) usage; exit 1; shift 1;;
                 *) break;;    
@@ -84,6 +88,12 @@ if [ "$PRESET" == true ]; then
    fi
    if [ -z "$LFQ_DIR" ]; then
     LFQ_DIR=$(find "/data/$NP_RUN" -type d -name fastq_pass)    # default path of local fastq directory at KU FOOD
+   fi
+   if [ -z "$F5_LOCAL" ]; then
+    F5_LOCAL=true    # we use mounted SMB disk for FASTA5 at KU FOOD
+   fi
+   if [ -z "$FQ_LOCAL" ]; then
+    FQ_LOCAL=false    # we use private servcer for FASTQ at KU FOOD
    fi
 fi
 
@@ -128,9 +138,25 @@ ssh $FQ_HOST "mkdir -p $RFQ_DIR"
 # substitute scp
 # fastq files come after fast5 due to the process of basecalling
 
-while 
-    rsync -hvrtPe ssh "$LFQ_DIR/" "$FQ_HOST:$RFQ_DIR"
-    rsync -hvrtPe ssh "$LF5_DIR/" "$F5_HOST:$RF5_DIR"
+rsync_make(){
+    local __LOCAL=$1
+    local __LDIR=$2
+    local __RDIR=$3
+    local __HOST=$4
+    local __RSYNC_CMD='rsync -hvrtPe '
+    if [ "$__LOCAL" == true ]; then
+        __RSYNC_CMD+="${__LDIR} ${__RDIR}"
+    elif
+        __RSYNC_CMD+="ssh ${__LDIR} ${__HOST}:${__RDIR}"
+    fi
+    echo ${__RSYNC_CMD}
+}
+
+while
+    #rsync -hvrtPe ssh "$LFQ_DIR/" "$FQ_HOST:$RFQ_DIR"
+    #rsync -hvrtPe ssh "$LF5_DIR/" "$F5_HOST:$RF5_DIR"
+    rsync_make FQ_LOCAL LFQ_DIR RFQ_DIR FQ_HOST
+    rsync_make F5_LOCAL LF5_DIR RF5_DIR F5_HOST
     inotifywait -e modify,create -t "$WAIT" "$LFQ_DIR" 
 do true ; done
 
