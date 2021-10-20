@@ -24,8 +24,8 @@ usage () {
     echo "  -d, --rfqd    overwrite -p if applied, absolute path for fastq directory on remote host"
     echo "  -j, --lf5d    overwrite -p if applied, absolute/relative path for fast5 directory on the local host"
     echo "  -l, --lfqd    overwrite -p if applied, absolute/relative path for fastq directory on the local host"
-    echo "  --f5local    overwrite -p if applied, sync fast5 on the local host"
-    echo "  --fqlocal    overwrite -p if applied, sync fastq on the local host"
+    echo "  --f5local    overwrite -p if applied, sync fast5 locally (mounted SMB disk), mtime not preserved"
+    echo "  --fqlocal    overwrite -p if applied, sync fastq locally (mounted SMB disk), mtime not preserved"
     echo "  -h, --help    Optional, Help message."   
     echo ""
     echo "Example:" 
@@ -145,9 +145,9 @@ rsync_make(){
     local __HOST=$4
     local __RSYNC_CMD='rsync -hvrtPe '
     if [ "$__LOCAL" == true ]; then
-        __RSYNC_CMD+="${__LDIR} ${__RDIR}"
+        __RSYNC_CMD+="rsync -hvrP --ignore-existing ${__LDIR} ${__RDIR}"
     else
-        __RSYNC_CMD+="ssh ${__LDIR} ${__HOST}:${__RDIR}"
+        __RSYNC_CMD+="rsync -hvrtPe ssh ${__LDIR} ${__HOST}:${__RDIR}"
     fi
     eval $__RSYNC_CMD
 }
