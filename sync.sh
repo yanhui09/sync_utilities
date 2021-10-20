@@ -149,7 +149,7 @@ rsync_make(){
     else
         __RSYNC_CMD+="ssh ${__LDIR} ${__HOST}:${__RDIR}"
     fi
-    echo $__RSYNC_CMD
+    eval $__RSYNC_CMD
 }
 
 while
