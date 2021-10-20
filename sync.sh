@@ -77,7 +77,7 @@ if [ "$PRESET" == true ]; then
     RF5_DIR="/run/user/1000/gvfs/dav:host=io.erda.dk,ssl=true/ONT/FAST5_storage/$NP_RUN"    
    fi
    if [ -z "$RFQ_DIR" ]; then
-    RFQ_DIR="/media/krakenosh/25289ce3-5e4b-4a16-821a-c95942864847/LUKASZ/ONT/GridION_fq_storage/$NP_RUN/basecalled_fq"    # default path of remote fastq directory (to be demultiplexed) at KU FOOD
+    RFQ_DIR="/media/krakenosh/25289ce3-5e4b-4a16-821a-c95942864847/LUKASZ/ONT/GridION_fq_storage/$NP_RUN"    # default path of remote fastq directory (to be demultiplexed) at KU FOOD
    fi
    if [ -z "$LF5_DIR" ]; then
     LF5_DIR=$(find "/data/$NP_RUN" -type d -name fast5_pass)    # default path of local fast5 directory at KU FOOD
