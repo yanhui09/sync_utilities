@@ -155,8 +155,8 @@ rsync_make(){
 while
     #rsync -hvrtPe ssh "$LFQ_DIR/" "$FQ_HOST:$RFQ_DIR"
     #rsync -hvrtPe ssh "$LF5_DIR/" "$F5_HOST:$RF5_DIR"
-    rsync_make FQ_LOCAL LFQ_DIR RFQ_DIR FQ_HOST
-    rsync_make F5_LOCAL LF5_DIR RF5_DIR F5_HOST
+    rsync_make $FQ_LOCAL $LFQ_DIR $RFQ_DIR $FQ_HOST
+    rsync_make $F5_LOCAL $LF5_DIR $RF5_DIR $F5_HOST
     inotifywait -e modify,create -t "$WAIT" "$LFQ_DIR" 
 do true ; done
 
