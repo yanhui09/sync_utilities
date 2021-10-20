@@ -143,11 +143,11 @@ rsync_make(){
     local __LDIR=$2
     local __RDIR=$3
     local __HOST=$4
-    local __RSYNC_CMD='rsync -hvrtPe '
+    local __RSYNC_CMD
     if [ "$__LOCAL" == true ]; then
-        __RSYNC_CMD+="rsync -hvrP --ignore-existing ${__LDIR} ${__RDIR}"
+        __RSYNC_CMD="rsync -hvrP --ignore-existing ${__LDIR} ${__RDIR}"
     else
-        __RSYNC_CMD+="rsync -hvrtPe ssh ${__LDIR} ${__HOST}:${__RDIR}"
+        __RSYNC_CMD="rsync -hvrtPe ssh ${__LDIR} ${__HOST}:${__RDIR}"
     fi
     eval $__RSYNC_CMD
 }
